@@ -1,0 +1,21 @@
+Nginx Upstrem Consistent Balancer
+=================================
+
+This is balancer meant to be used in conjuction with memcached_pass. 
+It uses the ketama algorithm using md5 for hasing both the server and key.
+Confirmed compatible with the libmemcached implementation.
+
+Configuration
+-------------
+
+Just add ``consistent`` to the upstream block. If you want to modify the
+weights of a server, just add ``weight`` to the server definition.
+
+::
+    upstream memcache_cluster {
+        consistent;
+        server 127.0.0.1:11211;
+        server 10.0.1.2:11211;
+        server 10.0.1.3:11212;
+    }
+
